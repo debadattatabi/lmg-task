@@ -57,12 +57,12 @@ const config = convict({
     password: {
       doc: 'Holds the SQL Server Password',
       format: String,
-      default: 'local'
+      default: 'root'
     },
     database: {
       doc: 'Holds the Database In SQL Server',
       format: String,
-      default: 'test'
+      default: 'lmggroup'
     },
     dialect: {
       doc: 'Holds the Dialect Details That we are using for the Connection',
@@ -110,8 +110,8 @@ const config = convict({
     },
     operatorsAliases: {
       doc: 'Whether To Use Aliases For SQL Operations or not',
-      format: Boolean,
-      default: false
+      format: Number,
+      default: 0
     }
   },
   logger: {

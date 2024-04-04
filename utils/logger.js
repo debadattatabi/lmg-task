@@ -1,7 +1,7 @@
 const winston = require('winston')
 const morgan = require('morgan')
 const config = require('../configurations/config')
-winston.emitErrs = true
+// winston.emitErrs = true
 
 // created separate httpLogger because we want to log express request separatly
 const httpLogger = new winston.Logger({
@@ -16,7 +16,34 @@ const httpLogger = new winston.Logger({
 })
 
 // logger to log all other logs type from application to exception
-const logger = new winston.Logger({
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.File({
+      filename: config.get('logger.logFileName'),
+      level: 'error',
+      format: winston.format.json()
+    }),
+    new winston.transports.Http({
+      level: 'warn',
+      format: winston.format.json()
+    }),
+    new winston.transports.Console({
+      level: 'info',
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      )
+    })
+  ], exceptionHandlers: [new winston.transports.File({
+      filename: config.get('logger.exceptionLogFileName'),
+      json: true,
+      maxsize: config.get('logger.logFileSize'),
+      colorize: false
+    })
+  ],
+  exitOnError: false
+});
+/* const logger = new winston.Logger({
   transports: [new winston.transports.File({
     filename: config.get('logger.logFileName'),
     json: true,
@@ -36,7 +63,7 @@ const logger = new winston.Logger({
 
   ],
   exitOnError: false
-})
+}) */
 
 // appender function to use winston file transport
 const stream = {

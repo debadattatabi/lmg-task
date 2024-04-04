@@ -9,8 +9,8 @@
 		"host": "localhost",
 		"port": 3306,
 		"username": "root",
-		"password": "local",
-		"database": "test",
+		"password": "root",
+		"database": "lmggroup",
 		"dialect": "mysql",
 		"connectTimeout": 60000,
 		"pool": {

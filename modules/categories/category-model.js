@@ -39,4 +39,4 @@ category.removeCategoryDetails = function (options) {
   })
 }
 
-module.exports = product
+module.exports = category

@@ -13,7 +13,7 @@ sequelizeTransforms(sequelize)
 
 // To Read All Files from the database directory and we will exclude index.js from the directory
 fs.readdirSync(path.join(__dirname, '../' + constants.moduleNames.models + '/')).forEach(function (file) {
-  const model = sequelize.import(path.join(__dirname, '/../' + constants.moduleNames.models + '/' + file))
+  const model = sequelize.define(path.join(__dirname, '/../' + constants.moduleNames.models + '/' + file))
   db[model.name] = model
 })
 
